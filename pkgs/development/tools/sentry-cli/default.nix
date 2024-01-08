@@ -36,6 +36,13 @@ rustPlatform.buildRustPackage rec {
         --zsh <($out/bin/sentry-cli completions zsh)
   '';
 
+  postInstall = ''
+    installShellCompletion --cmd sentry-cli \
+        --bash <($out/bin/sentry-cli completions bash) \
+        --fish <($out/bin/sentry-cli completions fish) \
+        --zsh <($out/bin/sentry-cli completions zsh)
+  '';
+
   meta = with lib; {
     homepage = "https://docs.sentry.io/cli/";
     license = licenses.bsd3;
