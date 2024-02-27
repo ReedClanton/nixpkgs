@@ -15,7 +15,7 @@
   ];
 
   dependencies = [
-    python3.pkgs.setuptools
+#    python3.pkgs.setuptools
     (python3.pkgs.buildPythonPackage rec {
       pname = "NetscapeBookmarksFileParser";
       version = "1.2";
@@ -32,6 +32,7 @@
   doCheck = false;
 
   nativeBuildInputs = [
+    python3.pkgs.setuptools
     (python3.pkgs.buildPythonPackage rec {
       pname = "NetscapeBookmarksFileParser";
       version = "1.2";
