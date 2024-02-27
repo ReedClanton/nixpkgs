@@ -1,9 +1,6 @@
-{ fetchFromGitHub, lib, python3 }:
-let
-  version = "0.0.1";
-in python3.pkgs.buildPythonApplication {
+{ buildPythonPackage, fetchFromGitHub, lib, python3 }: python3.pkgs.buildPythonApplication {
   pname = "html2nix";
-  inherit version;
+  version = "0.0.1";
   format = "pyproject";
 
   # Switch to use `fetchFromGitHub` for production.
@@ -28,11 +25,7 @@ in python3.pkgs.buildPythonApplication {
     })
   ];
 
-  # TODO: Ensure this is import(s) needed to run tests.
-#  nativeCheckInputs = [
-#  ];
-
-  meta = {
+  meta = with lib; {
     changelog = "https://github.com/ReedClanton/html2nix/blob/${version}/CHANGELOG.md";
     description = "Converts HTML files containing bookmarks to Nix syntax.";
     longDescritpion = ''
@@ -41,12 +34,12 @@ in python3.pkgs.buildPythonApplication {
       accepted by Home Manager via `programs.firefox.profiles.<profileName>.bookmarks`.
     '';
     homepage = "https://github.com/ReedClanton/html2nix";
-    license = lib.licenses.mit;
+    license = licenses.mit;
     mainProgram = "html2nix";
-    maintainers = with lib.maintainers; [
+    maintainers = with maintainers; [
       ReedClanton
     ];
-    platforms = lib.platforms.linux ++ lib.platforms.unix;
+    platforms = platforms.linux ++ lib.platforms.unix;
   };
 }
 
