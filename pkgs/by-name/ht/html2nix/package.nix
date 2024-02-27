@@ -1,12 +1,13 @@
 { buildPythonPackage, fetchFromGitHub, lib, python3 }: python3.pkgs.buildPythonApplication rec {
   pname = "html2nix";
   version = "0.0.1";
-  format = "pyproject";
+  pyproject = true;
+#  format = "pyproject";
 
   # Switch to use `fetchFromGitHub` for production.
   src = fetchFromGitHub {
     owner = "ReedClanton";
-    repo = "html2nix";
+    repo = "${pname}";
     rev = "v${version}";
     hash = "sha256-J0qEBS2I/h1zwf790AvZG0Bqe44YIgc1tgiFm8U41nk=";
   };
@@ -39,7 +40,7 @@
     maintainers = with maintainers; [
       ReedClanton
     ];
-    platforms = platforms.linux ++ lib.platforms.unix;
+    platforms = platforms.linux ++ platforms.unix;
   };
 }
 
