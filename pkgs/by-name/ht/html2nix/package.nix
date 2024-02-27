@@ -1,4 +1,4 @@
-{ fetchFromGitHub, lib, python3 }: python3.pkgs.buildPythonApplication rec {
+{ fetchFromGitHub, lib, python3, python3Packages }: python3Packages.buildPythonApplication rec {
   pname = "html2nix";
   version = "0.0.1";
   # Set python build type.
