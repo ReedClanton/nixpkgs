@@ -1,4 +1,4 @@
-{ fetchFromGitHub, lib, python3, python3Packages }: python3Packages.buildPythonApplication rec {
+{ fetchFromGitHub, lib, python3Packages }: python3Packages.buildPythonApplication rec {
   pname = "html2nix";
   version = "0.0.1";
   # Set python build type.
@@ -12,12 +12,12 @@
   };
 
   # Build time dependencies.
-  nativeBuildInputs = with python3.pkgs; [
+  nativeBuildInputs = with python3Packages; [
     setuptools
   ];
 
   # Run time dependencies.
-  buildInputs = with python3.pkgs; [
+  buildInputs = with python3Packages; [
     # Using my fork.
     (buildPythonPackage rec {
       pname = "NetscapeBookmarksFileParser";
