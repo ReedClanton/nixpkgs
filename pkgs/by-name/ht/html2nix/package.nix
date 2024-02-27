@@ -1,6 +1,7 @@
 { fetchFromGitHub, lib, python3 }: python3.pkgs.buildPythonApplication rec {
   pname = "html2nix";
   version = "0.0.1";
+  # Set python build type.
   pyproject = true;
 
   src = fetchFromGitHub {
@@ -10,38 +11,14 @@
     hash = "sha256-J0qEBS2I/h1zwf790AvZG0Bqe44YIgc1tgiFm8U41nk=";
   };
 
-#  dependencies = [
-#    (python3.pkgs.buildPythonPackage rec {
-#      pname = "NetscapeBookmarksFileParser";
-#      version = "1.2";
-#      src = fetchFromGitHub {
-#        owner = "ReedClanton";
-#        repo = "Netscape-Bookmarks-File-Parser";
-#        rev = "v${version}";
-#        hash = "sha256-b4AFTHNMv0aMy25URe22cIAZvAL3pkP0oas//SMWCHY=";
-#      };
-#    })
-#  ];
-
-  # Un-comment once tests are written.
-  doCheck = false;
-
-  propagatedBuildInputs = with python3.pkgs; [
+  # Build time dependencies.
+  nativeBuildInputs = with python3.pkgs; [
     setuptools
-#    (buildPythonPackage rec {
-#      pname = "NetscapeBookmarksFileParser";
-#      version = "1.2";
-#      src = fetchFromGitHub {
-#        owner = "ReedClanton";
-#        repo = "Netscape-Bookmarks-File-Parser";
-#        rev = "v${version}";
-#        hash = "sha256-b4AFTHNMv0aMy25URe22cIAZvAL3pkP0oas//SMWCHY=";
-#      };
-#    })
   ];
 
-  nativeBuildInputs = with python3.pkgs; [
-#    setuptools
+  # Run time dependencies.
+  buildInputs = with python3.pkgs; [
+    # Using my fork.
     (buildPythonPackage rec {
       pname = "NetscapeBookmarksFileParser";
       version = "1.2";
@@ -49,10 +26,13 @@
         owner = "ReedClanton";
         repo = "Netscape-Bookmarks-File-Parser";
         rev = "v${version}";
-        hash = "";
+        hash = "sha256-b4AFTHNMv0aMy25URe22cIAZvAL3pkP0oas//SMWCHY=";
       };
     })
   ];
+
+  # Un-comment once tests are written.
+  doCheck = false;
 
   meta = with lib; {
     changelog = "https://github.com/ReedClanton/html2nix/blob/${version}/CHANGELOG.md";
@@ -68,7 +48,8 @@
     maintainers = with maintainers; [
       ReedClanton
     ];
-    platforms = platforms.linux ++ platforms.unix;
+    # Same as Home Manager.
+    platforms = platforms.unix;
   };
 }
 
