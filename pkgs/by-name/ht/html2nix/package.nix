@@ -13,7 +13,7 @@
   dependencies = [
     python3.pkgs.setuptools
     (python3.pkgs.buildPythonPackage rec {
-      pname = "NetscapeBookmarksFileParser";
+      pname = "netscapebookmarksfileparser";
       version = "1.2";
       src = fetchFromGitHub {
         owner = "ReedClanton";
