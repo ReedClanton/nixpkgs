@@ -1,35 +1,38 @@
-{ buildPythonPackage, fetchFromGitHub, lib, python3, setuptools, setuptools-scm }: buildPythonPackage rec {
-  pname = "html2nix";
+{ fetchFromGitHub, lib, python3 }:
+let
   version = "0.0.1";
-  pyproject = true;
-#  format = "pyproject";
+in python3.pkgs.buildPythonApplication {
+  pname = "html2nix";
+  inherit version;
+  format = "pyproject";
 
+  # Switch to use `fetchFromGitHub` for production.
   src = fetchFromGitHub {
     owner = "ReedClanton";
-    repo = "${pname}";
+    repo = "html2nix";
     rev = "v${version}";
     hash = "sha256-J0qEBS2I/h1zwf790AvZG0Bqe44YIgc1tgiFm8U41nk=";
   };
 
-  build-system = [
-    setuptools-scm
-  ];
-
-  dependencies = [
-    setuptools
+  nativeBuildInputs = [
+    python3.pkgs.setuptools
     (buildPythonPackage rec {
       pname = "NetscapeBookmarksFileParser";
       version = "1.2";
       src = fetchFromGitHub {
         owner = "ReedClanton";
         repo = "Netscape-Bookmarks-File-Parser";
-        rev = "v${version}";
+        rev = "v1.2";
         hash = "sha256-b4AFTHNMv0aMy25URe22cIAZvAL3pkP0oas//SMWCHY=";
       };
     })
   ];
 
-  meta = with lib; {
+  # TODO: Ensure this is import(s) needed to run tests.
+#  nativeCheckInputs = [
+#  ];
+
+  meta = {
     changelog = "https://github.com/ReedClanton/html2nix/blob/${version}/CHANGELOG.md";
     description = "Converts HTML files containing bookmarks to Nix syntax.";
     longDescritpion = ''
@@ -38,12 +41,12 @@
       accepted by Home Manager via `programs.firefox.profiles.<profileName>.bookmarks`.
     '';
     homepage = "https://github.com/ReedClanton/html2nix";
-    license = licenses.mit;
+    license = lib.licenses.mit;
     mainProgram = "html2nix";
-    maintainers = with maintainers; [
+    maintainers = with lib.maintainers; [
       ReedClanton
     ];
-    platforms = platforms.linux ++ lib.platforms.unix;
+    platforms = lib.platforms.linux ++ lib.platforms.unix;
   };
 }
 
