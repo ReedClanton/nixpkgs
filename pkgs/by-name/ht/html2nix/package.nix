@@ -1,6 +1,6 @@
 { fetchFromGitHub, lib, python3Packages }: python3Packages.buildPythonApplication rec {
   pname = "html2nix";
-  version = "0.0.1";
+  version = "0.0.2";
   # Set python build type.
   pyproject = true;
 
@@ -48,8 +48,8 @@
     maintainers = with maintainers; [
       ReedClanton
     ];
-    # Same as Home Manager.
-    platforms = platforms.unix;
+    # When `platforms` isn't provided it's set to the same value as the interpreter.
+    #platforms = platforms.unix;
   };
 }
 
