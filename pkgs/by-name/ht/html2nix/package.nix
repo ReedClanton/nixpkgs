@@ -1,10 +1,8 @@
-{ buildPythonPackage, fetchFromGitHub, lib, python3 }: python3.pkgs.buildPythonApplication rec {
+{ buildPythonPackage, fetchFromGitHub, lib, python3, setuptools, setuptools-scm }: buildPythonPackage rec {
   pname = "html2nix";
   version = "0.0.1";
   pyproject = true;
-#  format = "pyproject";
 
-  # Switch to use `fetchFromGitHub` for production.
   src = fetchFromGitHub {
     owner = "ReedClanton";
     repo = "${pname}";
@@ -12,15 +10,22 @@
     hash = "sha256-J0qEBS2I/h1zwf790AvZG0Bqe44YIgc1tgiFm8U41nk=";
   };
 
+  build-system = [
+    setuptools-scm
+  ];
+
+  dependencies = [
+    setuptools
+  ];
+
   nativeBuildInputs = [
-    python3.pkgs.setuptools
     (buildPythonPackage rec {
       pname = "NetscapeBookmarksFileParser";
       version = "1.2";
       src = fetchFromGitHub {
         owner = "ReedClanton";
         repo = "Netscape-Bookmarks-File-Parser";
-        rev = "v1.2";
+        rev = "v${version}";
         hash = "sha256-b4AFTHNMv0aMy25URe22cIAZvAL3pkP0oas//SMWCHY=";
       };
     })
