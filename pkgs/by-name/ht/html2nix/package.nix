@@ -33,16 +33,16 @@
 
   nativeBuildInputs = [
     python3.pkgs.setuptools
-    (python3.pkgs.buildPythonPackage rec {
-      pname = "NetscapeBookmarksFileParser";
-      version = "1.2";
-      src = fetchFromGitHub {
-        owner = "ReedClanton";
-        repo = "Netscape-Bookmarks-File-Parser";
-        rev = "v${version}";
-        hash = "sha256-b4AFTHNMv0aMy25URe22cIAZvAL3pkP0oas//SMWCHY=";
-      };
-    })
+#    (python3.pkgs.buildPythonPackage rec {
+#      pname = "NetscapeBookmarksFileParser";
+#      version = "1.2";
+#      src = fetchFromGitHub {
+#        owner = "ReedClanton";
+#        repo = "Netscape-Bookmarks-File-Parser";
+#        rev = "v${version}";
+#        hash = "sha256-b4AFTHNMv0aMy25URe22cIAZvAL3pkP0oas//SMWCHY=";
+#      };
+#    })
   ];
 
   meta = with lib; {
