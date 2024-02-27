@@ -1,4 +1,4 @@
-{ buildPythonPackage, fetchFromGitHub, lib, python3, setuptools, setuptools-scm }: buildPythonPackage rec {
+{ fetchFromGitHub, lib, python3 }: python3.pkgs.buildPythonPackage rec {
   pname = "html2nix";
   version = "0.0.1";
   pyproject = true;
@@ -11,15 +11,18 @@
   };
 
   build-system = [
-    setuptools-scm
+    python3.pkgs.setuptools-scm
   ];
 
   dependencies = [
-    setuptools
+    python3.pkgs.setuptools
   ];
 
+  # Don't run tests.
+  doCheck = false;
+
   nativeBuildInputs = [
-    (buildPythonPackage rec {
+    (python3.pkgs.buildPythonPackage rec {
       pname = "NetscapeBookmarksFileParser";
       version = "1.2";
       src = fetchFromGitHub {
