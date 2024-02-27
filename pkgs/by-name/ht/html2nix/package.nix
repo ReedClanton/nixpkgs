@@ -1,4 +1,4 @@
-{ buildPythonPackage, fetchFromGitHub, lib, python3 }: python3.pkgs.buildPythonApplication {
+{ buildPythonPackage, fetchFromGitHub, lib, python3 }: python3.pkgs.buildPythonApplication rec {
   pname = "html2nix";
   version = "0.0.1";
   format = "pyproject";
