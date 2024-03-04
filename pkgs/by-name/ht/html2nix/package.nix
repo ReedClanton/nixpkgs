@@ -34,6 +34,9 @@
   # Un-comment once tests are written.
   doCheck = false;
 
+  # Try this to disable check that fails due to nixpkgs#285234.
+  dontCheckRuntimeDeps = true;
+
   meta = with lib; {
     changelog = "https://github.com/ReedClanton/html2nix/blob/${version}/CHANGELOG.md";
     description = "Converts HTML files containing bookmarks to Nix syntax.";
