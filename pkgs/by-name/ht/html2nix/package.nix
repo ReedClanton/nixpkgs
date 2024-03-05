@@ -17,7 +17,7 @@
   ];
 
   # Run time dependencies.
-  buildInputs = with python3Packages; [
+  propagatedBuildInputs = with python3Packages; [
     # Using my fork.
     (buildPythonPackage rec {
       pname = "NetscapeBookmarksFileParser";
