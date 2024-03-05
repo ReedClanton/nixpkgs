@@ -8,7 +8,7 @@
     owner = "ReedClanton";
     repo = "${pname}";
     rev = "v${version}";
-    hash = "sha256-J0qEBS2I/h1zwf790AvZG0Bqe44YIgc1tgiFm8U41nk=";
+    hash = "sha256-aOVaDl+IqR5ZDDX3Noo0XCz9iccqoKLuyaLmCn4QkyU=";
   };
 
   # Build time dependencies.
